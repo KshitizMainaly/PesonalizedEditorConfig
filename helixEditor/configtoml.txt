@@ -1,0 +1,52 @@
+# =========================
+# Helix Configuration
+# =========================
+
+# Set the theme
+theme = "base16_transparent"
+
+# =========================
+# Editor Settings
+# =========================
+[editor]
+line-number = "relative"
+
+mouse = false
+true-color = true
+bufferline = "multiple"
+color-modes = true
+end-of-line-diagnostics = "hint"
+cursor-shape.insert = "bar"
+cursor-shape.normal = "block"
+cursor-shape.select = "underline"
+file-picker.hidden = false
+auto-save = true  # <--- enable autosave on focus lost
+
+indent-guides = { render = true }
+
+
+# =========================
+# Insert Mode Keybindings
+# =========================
+[keys.insert]
+"j" = { "k" = "normal_mode" }
+
+# =========================
+[editor.inline-diagnostics]
+cursor-line = "error"
+
+# cursor-line = "hint"
+
+# Normal Mode Keybindings
+[keys.normal]
+
+
+"X" = "extend_line_up"
+
+C-e = [
+  ':sh rm -f /tmp/unique-file',
+  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
+  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
+  ':open %sh{cat /tmp/unique-file}',
+   ':redraw',
+ ]
