@@ -8,8 +8,9 @@ local config = wezterm.config_builder() or {}
 config.window_decorations = "RESIZE"        -- keep titlebar & resize borders
 
 -- my default shell
-config.default_prog = {"pwsh.exe", "-NoLogo"}
+-- config.default_prog = {"pwsh.exe", "-NoLogo"}
 
+config.default_prog = { "nu" }
 -- config.default_prog = {"cmd.exe"}
 
 
@@ -90,6 +91,17 @@ config.keys = {
 
   -- Close tab
   { mods = "LEADER", key = "q", action = act.CloseCurrentTab{confirm=false} },
+
+  -- Close current workspace (all tabs in this workspace)
+  { mods = "LEADER|SHIFT", key = "q", action = wezterm.action_callback(function(window, pane)
+      local workspace = window:active_workspace()
+      -- Close all tabs in current workspace
+      local tabs = window:mux_window():tabs()
+      for _, tab in ipairs(tabs) do
+        tab:activate()
+        window:perform_action(act.CloseCurrentTab{confirm=false}, pane)
+      end
+  end)},
 
   -- Tab navigator
   { mods = "LEADER", key = "t", action = act.ShowTabNavigator },
