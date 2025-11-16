@@ -17,7 +17,8 @@ source "C:/Users/ACER/.zoxide.nu"
 alias ll = ls --long
 alias lz = lazygit
 alias yz = yazi
-
+# alias ff = fastfetch --logo "Fedora" 
+alias ff = fastfetch --logo "C:/Users/ACER/.config/fastfetch/ascii.txt"
 # ---------- EDITOR ----------
 $env.EDITOR = "hx"
 
