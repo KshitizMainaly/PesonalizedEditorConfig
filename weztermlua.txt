@@ -1,4 +1,3 @@
-
 local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder() or {}
@@ -15,12 +14,11 @@ config.default_prog = {"pwsh.exe", "-NoLogo"}
 
 
 -- Frosted glass / Mica effect
-config.window_background_opacity = 0.85      -- fully transparent to show Mica
-config.text_background_opacity = 1.0        -- keep text readable
+config.window_background_opacity =1.2  -- fully transparent to show Mica config.text_background_opacity = 1.0        -- keep text readable
 -- mica is also good but arylic is more blurry and transparent
--- config.win32_system_backdrop = "Mica"       -- frosted glass effect
+config.win32_system_backdrop = "Mica"       -- frosted glass effect quite heavy
 
-config.win32_system_backdrop = "Acrylic"  -- More blur, less system integration
+-- config.win32_system_backdrop = "Acrylic"  -- More blur, less system integration
 
 
 -- =========================
@@ -38,7 +36,7 @@ config.font_size = 14
 -- =========================
 config.color_scheme = "Catppuccin Macchiato"
 
--- config.color_scheme = "tokyonight"
+
 -- config.color_scheme = "tokyonight"
 -- config.color_scheme = "One Dark"
 
