@@ -5,22 +5,27 @@ local config = wezterm.config_builder() or {}
 -- =========================
 -- Window & Appearance
 -- =========================
-config.window_decorations = "RESIZE"        -- keep titlebar & resize borders
+config.window_decorations = "RESIZE"
 
--- my default shell
--- config.default_prog = {"pwsh.exe", "-NoLogo"}
-
+-- Default shell
 config.default_prog = { "nu" }
--- config.default_prog = {"cmd.exe"}
 
+-- =========================
+-- FROSTED GLASS TRANSPARENCY SETTINGS
+-- =========================
+-- When using win32_system_backdrop, set opacity to 1.0
+config.window_background_opacity =0.85
+config.text_background_opacity = 1.0
 
--- Frosted glass / Mica effect
-config.window_background_opacity =1.2  -- fully transparent to show Mica config.text_background_opacity = 1.0        -- keep text readable
--- mica is also good but arylic is more blurry and transparent
-config.win32_system_backdrop = "Mica"       -- frosted glass effect quite heavy
+-- Enable Windows Acrylic backdrop for frosted glass effect
+config.win32_system_backdrop = "Acrylic"
 
--- config.win32_system_backdrop = "Acrylic"  -- More blur, less system integration
-
+-- If Acrylic doesn't work, try Mica instead:
+-- must be window background 1.0 for mica
+-- config.win32_system_backdrop = "Mica"
+-- If backdrop doesn't work at all, comment it out and use:
+-- config.window_background_opacity = 0.85
+-- config.win32_system_backdrop = nil
 
 -- =========================
 -- Font
@@ -37,22 +42,20 @@ config.font_size = 14
 -- =========================
 config.color_scheme = "Catppuccin Macchiato"
 
-
--- config.color_scheme = "tokyonight"
--- config.color_scheme = "One Dark"
-
 config.window_padding = {
   left = 20,
   right = 20,
   top = 20,
   bottom = 20,
 }
+
 config.window_frame = {
   border_left_width = "0.4cell",
   border_right_width = "0.4cell",
   border_bottom_height = "0.15cell",
   border_top_height = "0.15cell",
 }
+
 config.hide_tab_bar_if_only_one_tab = true
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
@@ -61,13 +64,12 @@ config.use_fancy_tab_bar = false
 -- Leader Key
 -- =========================
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
+
 -- =========================
 -- Keybindings
 -- =========================
 config.keys = {
-
--- Tabs
-
+  -- Tabs
   { mods = "LEADER", key = "s", action = act.PaneSelect {
       mode = "SwapWithActive",
   }},
@@ -95,7 +97,6 @@ config.keys = {
   -- Close current workspace (all tabs in this workspace)
   { mods = "LEADER|SHIFT", key = "q", action = wezterm.action_callback(function(window, pane)
       local workspace = window:active_workspace()
-      -- Close all tabs in current workspace
       local tabs = window:mux_window():tabs()
       for _, tab in ipairs(tabs) do
         tab:activate()
@@ -106,7 +107,7 @@ config.keys = {
   -- Tab navigator
   { mods = "LEADER", key = "t", action = act.ShowTabNavigator },
 
-  -- Split panes (CORRECTED for CWD inheritance)
+  -- Split panes
   { mods = "LEADER", key = "\\", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   { mods = "LEADER", key = "-", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 
