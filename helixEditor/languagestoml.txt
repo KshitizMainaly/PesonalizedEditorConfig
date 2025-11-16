@@ -1,62 +1,12 @@
-# HTML
-[[language]]
-name = "html"
-scope = "text.html.basic"
-file-types = ["html"]
-language-servers = ["vscode-html-language-server", "emmet-ls"]
+# =========================
+# Helix Language Configuration
+# =========================
 
-# JavaScript
-[[language]]
-name = "javascript"
-scope = "source.js"
-file-types = ["js"]
-language-servers = ["typescript-language-server"]
-auto-format = true
+[language-server.typescript-language-server]
+command = "typescript-language-server"
+args = ["--stdio"]
 
-# JSX
-[[language]]
-name = "jsx"
-scope = "source.jsx"
-injection-regex = "jsx"
-file-types = ["jsx"]
-roots = []
-comment-token = "//"
-language-servers = ["typescript-language-server"]
-indent = { tab-width = 2, unit = "  " }
-grammar = "javascript"
-
-# TypeScript
-[[language]]
-name = "typescript"
-scope = "source.ts"
-file-types = ["ts"]
-language-servers = ["typescript-language-server"]
-auto-format = true
-
-# TSX
-[[language]]
-name = "typescriptreact"
-scope = "source.tsx"
-file-types = ["tsx"]
-grammar = "tsx"
-language-servers = ["typescript-language-server", "emmet-ls", "tailwindcss"]
-auto-format = true
-
-# CSS
-[[language]]
-name = "css"
-scope = "source.css"
-file-types = ["css"]
-language-servers = ["vscode-css-language-server", "emmet-ls", "tailwindcss"]
-
-# JSON
-[[language]]
-name = "json"
-scope = "source.json"
-file-types = ["json"]
-language-servers = ["vscode-json-language-server"]
-
-# LANGUAGE SERVERS
+# Optional: HTML/CSS/JSON language servers for better autocomplete
 [language-server.vscode-html-language-server]
 command = "vscode-html-language-server"
 args = ["--stdio"]
@@ -69,14 +19,59 @@ args = ["--stdio"]
 command = "vscode-json-language-server"
 args = ["--stdio"]
 
-[language-server.typescript-language-server]
-command = "typescript-language-server"
-args = ["--stdio"]
+# =========================
+# Language Configuration
+# =========================
 
-[language-server.emmet-ls]
-command = "emmet-ls"
-args = ["--stdio"]
+[[language]]
+name = "javascript"
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+auto-format = true
 
-[language-server.tailwindcss]
-command = "tailwindcss-language-server"
-args = ["--stdio"]
+[[language]]
+name = "typescript"
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "jsx"
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "babel"] }
+auto-format = true
+
+[[language]]
+name = "tsx"
+language-servers = ["typescript-language-server"]
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+auto-format = true
+
+[[language]]
+name = "json"
+language-servers = ["vscode-json-language-server"]
+formatter = { command = "prettier", args = ["--parser", "json"] }
+auto-format = true
+
+[[language]]
+name = "css"
+language-servers = ["vscode-css-language-server"]
+formatter = { command = "prettier", args = ["--parser", "css"] }
+auto-format = true
+
+[[language]]
+name = "html"
+file-types = ["html", "htm", "ejs"]
+language-servers = ["vscode-html-language-server"]
+formatter = { command = "prettier", args = ["--parser", "html"] }
+auto-format = true
+
+[[language]]
+name = "markdown"
+formatter = { command = "prettier", args = ["--parser", "markdown"] }
+auto-format = true
+
+[[language]]
+name = "yaml"
+formatter = { command = "prettier", args = ["--parser", "yaml"] }
+auto-format = true
