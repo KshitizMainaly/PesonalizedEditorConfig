@@ -2,19 +2,14 @@
 # Nushell Config - ULTRA FAST for WezTerm
 # ===============================
 
-
 # ---------- ZOXIDE ----------
 # Hardcoded for MAX SPEED — no runtime detection
-
 $env.config.show_banner = false
-
 let zpath = "C:/Users/ACER/.zoxide.nu"
-
 # Create file ONLY if missing (1 ms)
 if not ($zpath | path exists) {
     zoxide init nushell | save -f $zpath
 }
-
 # MUST be literal path (Nushell rule)
 source "C:/Users/ACER/.zoxide.nu"
 
@@ -25,6 +20,7 @@ alias yz = yazi
 
 # ---------- EDITOR ----------
 $env.EDITOR = "hx"
+
 # ---------- CUSTOM WELCOME BANNER ----------
 print (ansi magenta_bold)
 print "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
@@ -41,19 +37,16 @@ print "⠀⠀⣼⣿⡟⣁⣤⣶⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿�
 print "⠀⢰⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀"
 print "⠀⠈⢿⣿⣿⡿⠿⠛⠉⠁⠀⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠋⠁⠀⠀⠀⠀⠀"
 print ""
-
 print (ansi cyan_bold)
 print "        'CODING SHOULD BE LIKE PLAYING THE FLUTE!'"
 print ""
-
 print (ansi yellow_bold)
 print "          K S H I T I Z   M A I N A L Y"
 print "                .......WELCOME"
-
 print (ansi reset)
+
 # ---------- ULTRA-FAST PROMPT ----------
 # (Fully optimized — no git slowdown)
-
 def git_branch [] {
     do -i { git branch --show-current } 
     | complete 
@@ -63,14 +56,17 @@ def git_branch [] {
 
 def create_left_prompt [] {
     let user = (whoami)
-
-    # Path (fastest possible)
-    let p = if ($env.PWD == $nu.home-path) {
-        "~"
-    } else {
-        $env.PWD | path relative-to $nu.home-path
+    # Path (fastest possible) - FIX: Handle path conversion errors
+    let p = try {
+        if ($env.PWD == $nu.home-path) {
+            "~"
+        } else {
+            $env.PWD | path relative-to $nu.home-path
+        }
+    } catch {
+        # Fallback to basename if relative-to fails
+        $env.PWD | path basename
     }
-
     # Git branch (safe + instant)
     let branch = (git_branch)
     let git_text = if ($branch | is-empty) {
@@ -78,7 +74,6 @@ def create_left_prompt [] {
     } else {
         $" (ansi purple_bold)($branch)(ansi reset)"
     }
-
     $"(ansi cyan_bold)($user)(ansi reset) in (ansi blue_bold)($p)(ansi reset)($git_text)"
 }
 
