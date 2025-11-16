@@ -14,6 +14,7 @@ if not ($zpath | path exists) {
 source "C:/Users/ACER/.zoxide.nu"
 
 # ---------- ALIASES ----------
+alias nn = exec nu
 alias ll = ls --long
 alias lz = lazygit
 alias yz = yazi
