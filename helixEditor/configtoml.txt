@@ -1,16 +1,14 @@
 # =========================
 # Helix Configuration
 # =========================
-
-# Set the theme
 theme = "base16_transparent"
 
 # =========================
 # Editor Settings
 # =========================
 [editor]
+shell = ["powershell", "-NoProfile", "-Command"]
 line-number = "relative"
-
 mouse = false
 true-color = true
 bufferline = "multiple"
@@ -20,10 +18,22 @@ cursor-shape.insert = "bar"
 cursor-shape.normal = "block"
 cursor-shape.select = "underline"
 file-picker.hidden = false
-auto-save = true  # <--- enable autosave on focus lost
-
+auto-save = true
 indent-guides = { render = true }
 
+# =========================
+# LSP Settings
+# =========================
+[editor.lsp]
+display-messages = true
+display-inlay-hints = false
+
+# =========================
+# Inline Diagnostics - Show real errors!
+# =========================
+[editor.inline-diagnostics]
+cursor-line = "hint"      # Show all diagnostics on cursor line
+other-lines = "error"     # Show errors (like typos) on all lines
 
 # =========================
 # Insert Mode Keybindings
@@ -32,21 +42,13 @@ indent-guides = { render = true }
 "j" = { "k" = "normal_mode" }
 
 # =========================
-[editor.inline-diagnostics]
-cursor-line = "error"
-
-# cursor-line = "hint"
-
 # Normal Mode Keybindings
+# =========================
 [keys.normal]
-
-
 "X" = "extend_line_up"
-
 C-e = [
-  ':sh rm -f /tmp/unique-file',
-  ':insert-output yazi %{buffer_name} --chooser-file=/tmp/unique-file',
-  ':insert-output echo "\x1b[?1049h\x1b[?2004h" > /dev/tty',
-  ':open %sh{cat /tmp/unique-file}',
-   ':redraw',
- ]
+  ':sh del D:\unique-file',
+  ':insert-output yazi.exe %{buffer_name} --chooser-file=D:\unique-file',
+  ':open %sh{type D:\unique-file}',
+  ':redraw',
+]
