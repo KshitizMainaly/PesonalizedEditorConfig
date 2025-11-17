@@ -114,6 +114,22 @@ def create_left_prompt [] {
     $"(ansi cyan_bold)($user)(ansi reset) in (ansi blue_bold)($p)(ansi reset)($git_text)"
 }
 
+# Rename WezTerm workspace with prompt if missing
+def wrn [
+    name?: string   # optional, triggers prompt if empty
+] {
+    let newname = if $name == null {
+        input "Workspace name: "
+    } else {
+        $name
+    }
+
+    wezterm cli rename-workspace $newname
+}
+
+alias wrn = wrn
+
+
 $env.PROMPT_COMMAND = { create_left_prompt }
 $env.PROMPT_INDICATOR = { "\n❯ " }
 $env.PROMPT_INDICATOR_VI_INSERT = { "\n❯ " }
