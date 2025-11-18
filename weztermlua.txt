@@ -11,28 +11,33 @@ config.window_decorations = "RESIZE"
 config.default_prog = { "nu" }
 
 -- =========================
--- FROSTED GLASS TRANSPARENCY SETTINGS
+-- IMPROVED FROSTED GLASS SETTINGS
 -- =========================
--- When using win32_system_backdrop, set opacity to 1.0
-config.window_background_opacity =0.85
+-- For best glass effect, use ONE of these approaches:
+
+-- OPTION 1: Windows Acrylic (Recommended for true glass effect)
+-- trun bellow all comment on for true glass like transpartent effect
+-- config.win32_system_backdrop = "Acrylic"
+-- config.window_background_opacity = 0.6  -- Must be 1.0 for system backdrop to work properly
 config.text_background_opacity = 1.0
 
--- Enable Windows Acrylic backdrop for frosted glass effect
-config.win32_system_backdrop = "Acrylic"
-
--- If Acrylic doesn't work, try Mica instead:
--- must be window background 1.0 for mica
+-- OPTION 2: Mica (Alternative if Acrylic has issues)
 -- config.win32_system_backdrop = "Mica"
--- If backdrop doesn't work at all, comment it out and use:
--- config.window_background_opacity = 0.85
+-- config.window_background_opacity = 1.0
+-- config.text_background_opacity = 1.0
+
+-- OPTION 3: Manual transparency (fallback)
 -- config.win32_system_backdrop = nil
+-- config.window_background_opacity = 0.85
+-- config.macos_window_background_blur = 20  -- If you're on macOS
+-- config.text_background_opacity = 0.9
 
 -- =========================
 -- Font
 -- =========================
 config.font = wezterm.font_with_fallback({
     "Maple Mono NF",
-    "JetBrains Mono NL",
+    "JetBrains Mono NL", 
     "Cascadia Code"
 })
 config.font_size = 14
@@ -40,20 +45,37 @@ config.font_size = 14
 -- =========================
 -- Colors & Tab Bar
 -- =========================
-config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Catppuccin Macchiato"
+-- config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "Nord"
+config.color_scheme = "Dracula"
+-- config.color_scheme = "One Dark (Darker)"
+-- config.color_scheme = "Nightfox" 
+-- config.color_scheme = "GitHub Dark"
+-- config.color_scheme = "Monokai Pro"
+-- config.color_scheme = "Ayu Dark"
+--config.color_scheme = "Horizon Dark"
+-- Better padding for glass effect
+
+
 
 config.window_padding = {
-  left = 20,
-  right = 20,
-  top = 20,
-  bottom = 20,
+  left = 25,
+  right = 25,
+  top = 25,
+  bottom = 25,
 }
 
 config.window_frame = {
   border_left_width = "0.4cell",
-  border_right_width = "0.4cell",
+  border_right_width = "0.4cell", 
   border_bottom_height = "0.15cell",
   border_top_height = "0.15cell",
+  -- Add some transparency to window frame too
+  inactive_titlebar_bg = "#1e1e2e",
+  active_titlebar_bg = "#1e1e2e",
+  inactive_titlebar_fg = "#cdd6f4",
+  active_titlebar_fg = "#cdd6f4",
 }
 
 config.hide_tab_bar_if_only_one_tab = true
@@ -61,12 +83,61 @@ config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 
 -- =========================
+-- IMPROVED BACKGROUND SETTINGS
+-- =========================
+
+config.background = {
+  {
+    source = {
+      File = "C:/Users/ACER/.config/wezterm/background/silverMeltingSatisfying.jpg",
+    },
+    -- Adjust these for better glass effect
+    width = "100%",
+    height = "100%", 
+    repeat_x = "NoRepeat",
+    repeat_y = "NoRepeat",
+    hsb = {
+      brightness = 0.08,  -- Slightly darken background to make text pop
+      hue = 1.0,
+      saturation = 1.0,
+    },
+    -- Important: attachment should be Fixed for backdrop effects
+    attachment = "Fixed",
+  },
+}
+
+-- =========================
+-- Cursor & Visual Enhancements
+-- =========================
+config.default_cursor_style = "BlinkingBar"
+config.cursor_blink_rate = 500
+
+-- Better colors for glass effect (FIXED - removed alpha channel from hex colors)
+config.colors = {
+  tab_bar = {
+    background = "#1e1e2e",  -- Removed alpha channel
+    active_tab = {
+      bg_color = "#cba6f7",
+      fg_color = "#1e1e2e",
+    },
+    inactive_tab = {
+      bg_color = "#585b70", 
+      fg_color = "#cdd6f4",
+    },
+    inactive_tab_hover = {
+      bg_color = "#6c7086",
+      fg_color = "#cdd6f4",
+    },
+  },
+}
+
+-- =========================
 -- Leader Key
 -- =========================
 config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 1000 }
 
 -- =========================
--- Keybindings
+-- Keybindings (unchanged from your config)
 -- =========================
 config.keys = {
   -- Tabs
@@ -142,11 +213,6 @@ for i = 1, 9 do
     action = act.ActivateTab(i - 1),
   })
 end
-
--- =========================
--- Cursor & Pane
--- =========================
-config.default_cursor_style = "BlinkingBar"
 
 -- Keep split panes in same CWD
 wezterm.on("split-pane", function(window, pane)
