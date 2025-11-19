@@ -30,6 +30,8 @@ Every component is chosen and configured to complement the others, forming a **s
 
 
 look something like this ->
+<img width="1875" height="1061" alt="image" src="https://github.com/user-attachments/assets/c69e061b-face-4014-b35a-68a09cfb4a3d" />
+
 <img width="1702" height="897" alt="image" src="https://github.com/user-attachments/assets/1ddde8b1-9738-46fd-96ac-3980591ff2de" />
 
 <img width="1918" height="1066" alt="myAwesomeTerminalWorkflow" src="https://github.com/user-attachments/assets/c65c6d07-a17c-4fef-a6b4-fd405ed4a7eb" />
