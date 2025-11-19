@@ -27,7 +27,7 @@ Every component is chosen and configured to complement the others, forming a **s
 | **[Yazi](https://yazi-rs.github.io/)** | File manager | Fast, terminal-based, opens projects or files directly into Helix |
 | **[Lazygit](https://github.com/jesseduffield/lazygit)** | Git UI | Seamless Git workflow in terminal — plays nicely inside WezTerm splits |
 | **[Zoxide](https://github.com/ajeetdsouza/zoxide)** | Directory jumper | Smarter `cd`; used to jump instantly between projects or repos |
-| **[Nutshell](https://github.com/OSCPU/NutShell)** | Modern shell less popular than pwsh but has its own cwd inheritance and extremely fast|
+| **[Nutshell](https://github.com/OSCPU/NutShell)** |Modern shell | nutshell feel like more like programmign languate than shell itself, it feels very modern but less popular than pwsh but has its own cwd inheritance and extremely fast|
 
 
 look something like this ->
