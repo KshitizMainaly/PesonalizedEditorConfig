@@ -54,7 +54,7 @@ config.color_scheme = "Dracula"
 -- config.color_scheme = "GitHub Dark"
 -- config.color_scheme = "Monokai Pro"
 -- config.color_scheme = "Ayu Dark"
---config.color_scheme = "Horizon Dark"
+-- config.color_scheme = "Horizon Dark"
 -- Better padding for glass effect
 
 
@@ -89,15 +89,14 @@ config.use_fancy_tab_bar = false
 config.background = {
   {
     source = {
-      File = "C:/Users/ACER/.config/wezterm/background/silverMeltingSatisfying.jpg",
-    },
+      File = "C:/Users/ACER/.config/wezterm/background/sindhuliRoadBato.jpg"},
     -- Adjust these for better glass effect
     width = "100%",
     height = "100%", 
     repeat_x = "NoRepeat",
     repeat_y = "NoRepeat",
     hsb = {
-      brightness = 0.08,  -- Slightly darken background to make text pop
+      brightness = 0.09,  -- Slightly darken background to make text pop
       hue = 1.0,
       saturation = 1.0,
     },
@@ -109,8 +108,14 @@ config.background = {
 -- =========================
 -- Cursor & Visual Enhancements
 -- =========================
-config.default_cursor_style = "BlinkingBar"
-config.cursor_blink_rate = 500
+-- config.default_cursor_style = "BlinkingBar"
+-- config.cursor_blink_rate = 500
+
+-- for helix like 
+config.cursor_blink_rate = 0
+config.default_cursor_style = "SteadyBlock"  -- Helix-like block cursor
+config.force_reverse_video_cursor = true     -- Makes cursor more visible
+
 
 -- Better colors for glass effect (FIXED - removed alpha channel from hex colors)
 config.colors = {
